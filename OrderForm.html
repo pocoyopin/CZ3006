@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+    </head>
+
+    <body>
+
+        <h1>CZ3006 Assignment 2</h1>
+        <hr>
+
+        <form action="server.php" method="post" name="form">
+            <fieldset>
+                <legend>Order Form</legend>
+
+                <div>
+                    Name:
+                    <input type="text" name="name" value="Your name"> <br>
+                </div>
+                <br>
+
+                What do you want to purchase?<br>
+                Number of apples:
+                <input type="text" name="apple"> <br>
+                Number of oranges:
+                <input type="text" name="orange"> <br>
+                Number of bananas:
+                <input type="text" name="banana"> <br>
+            </fieldset>
+            <br>
+
+            <fieldset>
+                <legend>Payment Form</legend>
+
+                Total cost: $
+                <input type="text" name="totalcost" onfocus="blur()">
+                <br>
+                <br>
+
+                Payment method: <br>
+                <input type="radio" name="payment" value="Visa" checked>Visa <br>
+                <input type="radio" name="payment" value="MasterCard">MasterCard <br>
+                <input type="radio" name="payment" value="Discover">Discover <br>
+                <br>
+
+                <input type="submit" value="Submit">
+            </fieldset>
+        </form>
+
+    </body>
+
+    <script>
+    </script>
+</html>
