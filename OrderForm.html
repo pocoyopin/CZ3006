@@ -33,7 +33,7 @@
                 <legend>Payment Form</legend>
 
                 Total cost: $
-                <input type="text" name="totalcost" onfocus="blur()">
+                <input type="text" name="totalcost" id="totalCost" onfocus="blur()">
                 <br>
                 <br>
 
@@ -50,5 +50,8 @@
     </body>
 
     <script>
+        function blur() {
+            document.getElementById("totalCost").blur();
+        }
     </script>
 </html>
