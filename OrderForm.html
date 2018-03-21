@@ -21,11 +21,11 @@
 
                 What do you want to purchase?<br>
                 Number of apples:
-                <input type="text" name="apple"> <br>
+                <input type="text" name="apple" id="apple"> <br>
                 Number of oranges:
-                <input type="text" name="orange"> <br>
+                <input type="text" name="orange" id="orange"> <br>
                 Number of bananas:
-                <input type="text" name="banana"> <br>
+                <input type="text" name="banana" id="banana"> <br>
             </fieldset>
             <br>
 
@@ -52,6 +52,17 @@
     <script>
         function blur() {
             document.getElementById("totalCost").blur();
+        }
+
+        //calculate the total cost of the user's order
+        function calculateTotalCost() {
+            var priceApple = 0.69;
+            var priceOrange = 0.59;
+            var priceBanana = 0.39;
+            var quantityApple = parseInt(document.getElementById("apple").value);
+            var quantityOrange = parseInt(document.getElementById("orange").value);
+            var quantityBanana = parseInt(document.getElementById("banana").value);
+            document.getElementById("totalCost").value = (priceApple * quantityApple) + (priceBanana * quantityBanana) + (priceOrange * quantityOrange);
         }
     </script>
 </html>
