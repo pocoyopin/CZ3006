@@ -2,54 +2,104 @@
 <html>
 
     <head>
+        <title>Order Form</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
 
     <body>
 
-        <h1>CZ3006 Assignment 2</h1>
-        <hr>
+        <div class="header">
+            <h1>Fruit Market</h1>
+        </div>
 
-        <form action="server.php" method="post" name="form">
-            <fieldset>
-                <legend>Order Form</legend>
+        <div class="body">
+            <div class="card bg-light" style="width: 500px;">
+                <div class="card-body">
+                    <form action="server.php" method="post" name="form" onsubmit="validateForm()">
 
-                <div>
-                    Name:
-                    <input type="text" name="name" value="Your name"> <br>
+                        <legend>Order Form</legend>
+
+                        <ul>
+                            <li class="form-row">
+                                <label class="control-label">Name</label>
+                                <input class="form-control" type="text" name="name" id="nameInput" placeholder="Enter name (one word only)" onchange="validateName()" required><br>
+                                <label class="validator" id="nameValidate"></label><br>
+                            </li>
+                        </ul>
+
+                        <h5>What do you want to purchase?</h5>
+                        <ul>
+                            <li class="form-row">
+                                <label class="control-label">Apple (0.69 each)</label>
+                                <input class="form-control" type="number" name="apple" id="appleInput" oninput="calculateTotalCost()" onchange="calculateTotalCost(), validateApple()" placeholder="Quantity of apple" required><br>
+                                <label class="validator" id="appleValidate"></label><br>
+                            </li>
+
+                            <li class="form-row">
+                                <label class="control-label">Orange (0.59 each)</label>
+                                <input class="form-control" type="number" name="orange" id="orangeInput" oninput="calculateTotalCost()" onchange="calculateTotalCost(), validateOrange()" placeholder="Quantity of orange" required><br>
+                                <label class="validator" id="orangeValidate"></label><br>
+                            </li>
+                                    
+                            <li class="form-row">
+                                <label class="control-label">Banana (0.39 each)</label>
+                                <input class="form-control" type="number" name="banana" id="bananaInput" oninput="calculateTotalCost()" onchange="calculateTotalCost(), validateBanana()" placeholder="Quantity of banana" required><br>
+                                <label class="validator" id="bananaValidate"></label><br>
+                            </li>
+                        </ul>
+                        <br>
+
+                        <h5>Payment method</h5>
+                        <div class="payment">
+                            <div class="floatBlock">
+                                <label for="payment">
+                                    <input type="radio" name="payment" value="Visa" id="payment" checked> Visa
+                                    <img src="visalogo.png" alt="Visa Logo" style="width:80px;height:60px;">
+                                </label>
+                            </div>
+
+                            <div class="floatBlock">
+                                <label for="payment">
+                                    <input type="radio" name="payment" value="Visa" id="payment"> MasterCard
+                                    <img src="mastercardlogo.png" alt="MasterCard Logo" style="width:85px;height:60px;">
+                                </label>
+                            </div>
+                                
+                            <div class="floatBlock">
+                                <label for="payment">
+                                    <input type="radio" name="payment" value="Visa" id="payment"> Discover
+                                    <img src="discoverlogo.png" alt="Discover Logo" style="width:85px;height:60px;">
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="form-inline">
+                            <label class="control-label">Total cost: $</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="0.00" id="totalCost" name="totalCost" onfocus="this.blur()">
+                            </div>                                
+                        </div>
+                        <br>
+
+                        <div class="button">
+                            <input type="reset" class="btn btn-default">
+                            <input type="submit" class="btn btn-info" id="submitbtn" onclick="validateForm()" style="margin-left: 10px;">
+                        </div>
+
+                    </form>
                 </div>
-                <br>
-
-                What do you want to purchase?<br>
-                Number of apples:
-                <input type="text" name="apple" id="apple"> <br>
-                Number of oranges:
-                <input type="text" name="orange" id="orange"> <br>
-                Number of bananas:
-                <input type="text" name="banana" id="banana"> <br>
-            </fieldset>
-            <br>
-
-            <fieldset>
-                <legend>Payment Form</legend>
-
-                Total cost: $
-                <input type="text" name="totalcost" id="totalCost" onfocus="blur()">
-                <br>
-                <br>
-
-                Payment method: <br>
-                <input type="radio" name="payment" value="Visa" checked>Visa <br>
-                <input type="radio" name="payment" value="MasterCard">MasterCard <br>
-                <input type="radio" name="payment" value="Discover">Discover <br>
-                <br>
-
-                <input type="submit" value="Submit">
-            </fieldset>
-        </form>
+            </div>
+        </div>
 
     </body>
 
-    <script>
+    <script type="text/javascript">
         function blur() {
             document.getElementById("totalCost").blur();
         }
@@ -59,10 +109,114 @@
             var priceApple = 0.69;
             var priceOrange = 0.59;
             var priceBanana = 0.39;
-            var quantityApple = parseInt(document.getElementById("apple").value);
-            var quantityOrange = parseInt(document.getElementById("orange").value);
-            var quantityBanana = parseInt(document.getElementById("banana").value);
-            document.getElementById("totalCost").value = (priceApple * quantityApple) + (priceBanana * quantityBanana) + (priceOrange * quantityOrange);
+            var quantityApple = document.getElementById("appleInput").value;
+            var quantityOrange = document.getElementById("orangeInput").value;
+            var quantityBanana = document.getElementById("bananaInput").value;
+
+            document.getElementById("totalCost").value = ((priceApple * quantityApple) + (priceBanana * quantityBanana) + (priceOrange * quantityOrange)).toFixed(2);
         }
+
+        function validateName() {
+            var inputName = document.getElementById("nameInput").value;
+            var validatorName = document.getElementById("nameValidate");
+            var re = /^[A-Za-z]+$/;
+
+            if ((inputName==="") || (!(re.test(inputName)))) {
+                validatorName.textContent = "Invalid name!";
+                validatorName.style.display = "inline";
+                document.getElementById("submitbtn").disabled = true;
+                return false;
+            }
+
+            validatorName.textContent = "";
+            validatorName.style.display = "none";
+            document.getElementById("submitbtn").disabled = false;
+            return true;
+        }
+
+        function validateApple() {
+            var inputApple = document.getElementById("appleInput").value;
+            var validatorApple = document.getElementById("appleValidate");
+
+            if (inputApple<0) {
+                validatorApple.textContent = "Invalid number of apples!";
+                validatorApple.style.display = "inline";
+                document.getElementById("submitbtn").disabled = true;
+                return false;
+            }
+
+            validatorApple.textContent = "";
+            validatorApple.style.display = "none";
+            document.getElementById("submitbtn").disabled = false;
+            return true;
+        }
+
+        function validateOrange() {
+            var inputOrange = document.getElementById("orangeInput").value;
+            var validatorOrange = document.getElementById("orangeValidate");
+
+            if (inputOrange<0) {
+                validatorOrange.textContent = "Invalid number of oranges!";
+                validatorOrange.style.display = "inline";
+                document.getElementById("submitbtn").disabled = true;
+                return false;
+            }
+
+            validatorOrange.textContent = "";
+            validatorOrange.style.display = "none";
+            document.getElementById("submitbtn").disabled = false;
+            return true;
+        }
+
+        function validateBanana() {
+            var inputBanana = document.getElementById("bananaInput").value;
+            var validatorBanana = document.getElementById("bananaValidate");
+
+            if (inputBanana<0) {
+                validatorBanana.textContent = "Invalid number of bananas!";
+                validatorBanana.style.display = "inline";
+                document.getElementById("submitbtn").disabled = true;
+                return false;
+            }
+
+            validatorBanana.textContent = "";
+            validatorBanana.style.display = "none";
+            document.getElementById("submitbtn").disabled = false;
+            return true;
+        }
+
+        function validateFruit() {
+            validateApple();
+            validateBanana();
+            validateOrange();
+            return (validateApple() && validateBanana() && validateOrange());
+        }
+
+        function validateForm() {
+            validateFruit();
+            validateName();
+            return (validateFruit() && validateName());
+        }
+
+        function changeEvent() {
+            var name = document.getElementById("nameInput").value;
+            var apple = document.getElementById("appleInput").value;
+            var orange = document.getElementById("orangeInput").value;
+            var banana = document.getElementById("bananaInput").value;
+
+            name.addEventListener("change", validateName);
+            apple.addEventListener("change", validateApple);
+            apple.addEventListener("change", calculateTotalCost);
+            orange.addEventListener("change", validateOrange);
+            orange.addEventListener("change", calculateTotalCost);
+            banana.addEventListener("change", validateBanana);
+            banana.addEventListener("change", calculateTotalCost);
+        }
+
+        //for firefox
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded", changeEvent);
+        }
+
     </script>
 </html>
